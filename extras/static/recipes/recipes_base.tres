@@ -1,0 +1,19 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://b1osmxbmc5uom"]
+
+[ext_resource type="Script" path="res://extras/static/recipes/recipe_resource_handler.gd" id="1_hxb2i"]
+
+[resource]
+script = ExtResource("1_hxb2i")
+recipe_dict = {
+"Glass": {
+"energy_cost": 10,
+"input": {
+"Sand": 4
+},
+"output": {
+"Glass": 1
+},
+"time": 1.0,
+"tooltip": ""
+}
+}

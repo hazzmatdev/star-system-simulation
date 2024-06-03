@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://byussovjdeok3"]
+
+[ext_resource type="Script" path="res://objects/structures/stellar/scripts/OrbitalStation.gd" id="1_2li2j"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_j68oe"]
+
+[node name="OrbitalStationPivot" type="Node3D"]
+script = ExtResource("1_2li2j")
+
+[node name="OrbitalStationBody" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="OrbitalStationBody"]
+mesh = SubResource("BoxMesh_j68oe")

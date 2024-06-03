@@ -1,0 +1,77 @@
+[gd_scene load_steps=11 format=3 uid="uid://br6fxk5imh2x1"]
+
+[ext_resource type="Script" path="res://main/scripts/main.gd" id="1_udldb"]
+[ext_resource type="PackedScene" uid="uid://cp2kq35bq6q3w" path="res://objects/celestial-bodies/scenes/planet.tscn" id="2_mgnhg"]
+[ext_resource type="PackedScene" uid="uid://da8btdv8mqty" path="res://objects/vehicles/stellar/scenes/cargo_ship.tscn" id="3_t0bho"]
+[ext_resource type="PackedScene" uid="uid://cbjonf81thjae" path="res://main/scenes/cargo_timer.tscn" id="4_cqbi2"]
+[ext_resource type="PackedScene" uid="uid://cp0yiab5xegi7" path="res://ui/scenes/ui.tscn" id="5_rmh8s"]
+[ext_resource type="Script" path="res://objects/celestial-bodies/scripts/Star.gd" id="6_tubbk"]
+[ext_resource type="PackedScene" uid="uid://cpiaqim1hljp3" path="res://objects/celestial-bodies/meshes/Star.blend" id="7_83gj5"]
+[ext_resource type="Script" path="res://main/scripts/Camera.gd" id="8_xvxm0"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_5qogs"]
+radius = 1.0
+
+[sub_resource type="Environment" id="Environment_l73ad"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(0.0666667, 0.0784314, 0.0862745, 1)
+ssr_enabled = true
+ssao_enabled = true
+glow_enabled = true
+
+[node name="Main" type="Node"]
+script = ExtResource("1_udldb")
+world_scalar = 3.0
+star_scalar = 50.0
+planet_scalar = 16.0
+vehicle_scalar = 0.75
+planet_distance_scalar = 250.0
+orbit_speed_scalar = 1.0
+min_planets = 4
+max_planets = 6
+max_moons = 6
+planet = ExtResource("2_mgnhg")
+cargo_ship = ExtResource("3_t0bho")
+cargo_timer_scene = ExtResource("4_cqbi2")
+
+[node name="UI" parent="." instance=ExtResource("5_rmh8s")]
+
+[node name="SetCargoLanes" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[node name="Star" type="Node3D" parent="."]
+script = ExtResource("6_tubbk")
+
+[node name="StarMesh" parent="Star" groups=["stars"] instance=ExtResource("7_83gj5")]
+
+[node name="Area3D" type="Area3D" parent="Star/StarMesh"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Star/StarMesh/Area3D"]
+shape = SubResource("SphereShape3D_5qogs")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Star"]
+light_color = Color(0.988235, 0.396078, 0.258824, 1)
+omni_range = 1.0
+
+[node name="CameraPivot" type="Node3D" parent="."]
+script = ExtResource("8_xvxm0")
+camera_pan_speed = 300.0
+camera_zoom_speed = 25.0
+camera_sens = 0.2
+max_planet_zoom = 120.0
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 284, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_l73ad")
+
+[connection signal="hold_camera" from="UI" to="CameraPivot" method="_on_ui_hold_camera"]
+[connection signal="star_select" from="UI" to="." method="_on_ui_star_select"]
+[connection signal="stop_hold_camera" from="UI" to="CameraPivot" method="_on_ui_stop_hold_camera"]
+[connection signal="timeout" from="SetCargoLanes" to="." method="_on_set_cargo_lanes_timeout"]
+[connection signal="star_select" from="Star" to="CameraPivot" method="_on_star_star_select"]
+[connection signal="mouse_entered" from="Star/StarMesh/Area3D" to="Star" method="_on_area_3d_mouse_entered"]
+[connection signal="mouse_exited" from="Star/StarMesh/Area3D" to="Star" method="_on_area_3d_mouse_exited"]

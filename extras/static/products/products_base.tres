@@ -1,0 +1,50 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bnl3nkrrjntk8"]
+
+[ext_resource type="Script" path="res://extras/static/products/product_resource_handler.gd" id="1_ltudm"]
+
+[resource]
+script = ExtResource("1_ltudm")
+product_dict = {
+"Copper": {
+"density": 8000.0,
+"family": "COPPER",
+"rank": 1,
+"tooltip": ""
+},
+"Copper Ore": {
+"density": 2265.0,
+"family": "RAW_COPPER",
+"rank": 1,
+"tooltip": ""
+},
+"Crude Iron": {
+"density": 10000.0,
+"family": "IRON",
+"rank": 1,
+"tooltip": ""
+},
+"Glass": {
+"density": 2579.0,
+"family": "GLASS",
+"rank": 1,
+"tooltip": ""
+},
+"Iron Ore": {
+"density": 5150.0,
+"family": "RAW_IRON",
+"rank": 1,
+"tooltip": ""
+},
+"Limestone": {
+"density": 271.0,
+"family": "FLUX",
+"rank": 1,
+"tooltip": ""
+},
+"Sand": {
+"density": 1201.0,
+"family": "SILICA",
+"rank": 1,
+"tooltip": ""
+}
+}

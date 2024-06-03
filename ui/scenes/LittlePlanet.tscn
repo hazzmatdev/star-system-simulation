@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvtob7q8yn1jk"]
+
+[ext_resource type="Script" path="res://ui/scripts/LittlePlanet.gd" id="1_8wnw4"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_qcsbs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d0rv6"]
+radius = 1.0
+
+[node name="Pivot" type="Node2D"]
+script = ExtResource("1_8wnw4")
+
+[node name="LittlePlanet" type="MeshInstance2D" parent="."]
+mesh = SubResource("SphereMesh_qcsbs")
+
+[node name="Area2D" type="Area2D" parent="LittlePlanet"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LittlePlanet/Area2D"]
+scale = Vector2(0.55, 0.55)
+shape = SubResource("CircleShape2D_d0rv6")
+
+[connection signal="mouse_entered" from="LittlePlanet/Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="LittlePlanet/Area2D" to="." method="_on_area_2d_mouse_exited"]

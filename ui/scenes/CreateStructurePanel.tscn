@@ -1,0 +1,76 @@
+[gd_scene load_steps=4 format=3 uid="uid://ca1xn2aqh6k75"]
+
+[ext_resource type="Script" path="res://ui/scenes/create_structure_panel.gd" id="1_6krte"]
+[ext_resource type="StyleBox" uid="uid://bah1etxdl4seb" path="res://ui/themes/ui_panel.tres" id="1_wdtjw"]
+[ext_resource type="PackedScene" uid="uid://b26um1bp0yrih" path="res://objects/structures/planetary/scenes/planetary_placer_spherical.tscn" id="2_yobj3"]
+
+[node name="CreateStructurePanel" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 1
+script = ExtResource("1_6krte")
+planetary_placer = ExtResource("2_yobj3")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+offset_right = 310.0
+offset_bottom = 111.0
+theme_override_styles/panel = ExtResource("1_wdtjw")
+metadata/_edit_group_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Construct Structure"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+columns = 3
+
+[node name="Button" type="Button" parent="PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+mouse_filter = 1
+text = "Mining Drill"
+
+[node name="Button2" type="Button" parent="PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+mouse_filter = 1
+text = "Autofac"
+
+[node name="Button3" type="Button" parent="PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+mouse_filter = 1
+text = "Launch Pad"
+
+[node name="Button4" type="Button" parent="PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+mouse_filter = 1
+text = "Furnace"
+
+[node name="Button5" type="Button" parent="PanelContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 2
+mouse_filter = 1
+text = "Warehouse"
+
+[connection signal="mouse_entered" from="PanelContainer" to="." method="_on_panel_container_mouse_entered"]
+[connection signal="mouse_exited" from="PanelContainer" to="." method="_on_panel_container_mouse_exited"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/GridContainer/Button" to="." method="_on_place_structure_pressed"]

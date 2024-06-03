@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbjonf81thjae"]
+
+[ext_resource type="Script" path="res://main/scripts/cargo_timer.gd" id="1_3krjy"]
+
+[node name="CargoTimer" type="Timer"]
+script = ExtResource("1_3krjy")

@@ -1,0 +1,380 @@
+[gd_scene load_steps=12 format=3 uid="uid://cp0yiab5xegi7"]
+
+[ext_resource type="Script" path="res://ui/scripts/ui.gd" id="1_pm7ag"]
+[ext_resource type="PackedScene" uid="uid://bvtob7q8yn1jk" path="res://ui/scenes/LittlePlanet.tscn" id="2_fm3wd"]
+[ext_resource type="StyleBox" uid="uid://bah1etxdl4seb" path="res://ui/themes/ui_panel.tres" id="3_aq7f3"]
+[ext_resource type="PackedScene" uid="uid://cxcxuultmtgdv" path="res://extras/tools/mod_tools_recipe.tscn" id="3_pvck6"]
+[ext_resource type="PackedScene" uid="uid://ca1xn2aqh6k75" path="res://ui/scenes/CreateStructurePanel.tscn" id="5_ds2y7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mxjyx"]
+bg_color = Color(0.309804, 0.411765, 0.513726, 0.466667)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.0745098, 0.164706, 0.227451, 1)
+border_blend = true
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+shadow_color = Color(0.0313726, 0.0313726, 0.0313726, 0.345098)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4ommo"]
+font_size = 42
+outline_size = 8
+outline_color = Color(0.117647, 0.117647, 0.117647, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y7jof"]
+bg_color = Color(0.309804, 0.411765, 0.513726, 1)
+border_width_top = 5
+border_width_right = 5
+border_color = Color(0.0784314, 0.168627, 0.231373, 1)
+border_blend = true
+corner_radius_top_right = 15
+expand_margin_left = 10.0
+expand_margin_top = 10.0
+expand_margin_right = 10.0
+expand_margin_bottom = 10.0
+shadow_color = Color(0.0313726, 0.0313726, 0.0313726, 0.345098)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nnb0h"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_ynfbw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_324xp"]
+radius = 0.5
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_pm7ag")
+little_planet = ExtResource("2_fm3wd")
+orbit_interval = 8.0
+
+[node name="CheckBox" type="CheckBox" parent="."]
+z_index = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = -8.0
+grow_vertical = 0
+size_flags_vertical = 0
+button_pressed = true
+metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="CheckBox"]
+layout_mode = 0
+offset_left = 29.0
+offset_right = 132.0
+offset_bottom = 23.0
+text = "Toggle Orbits"
+metadata/_edit_use_anchors_ = true
+
+[node name="StarNameContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(300, 0)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -5.0
+offset_right = 5.0
+offset_bottom = 63.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mxjyx")
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="StarName" type="Label" parent="StarNameContainer"]
+layout_mode = 2
+text = "
+"
+label_settings = SubResource("LabelSettings_4ommo")
+horizontal_alignment = 1
+uppercase = true
+
+[node name="ObjectPanel" type="PanelContainer" parent="."]
+visible = false
+anchors_preset = -1
+anchor_left = 0.0046875
+anchor_top = 0.780556
+anchor_right = 0.188021
+anchor_bottom = 0.953704
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_y7jof")
+metadata/_edit_group_ = true
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="PlanetUI" type="VBoxContainer" parent="ObjectPanel"]
+layout_mode = 2
+
+[node name="ObjectName" type="Label" parent="ObjectPanel/PlanetUI"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+size_flags_stretch_ratio = 3.46
+theme_override_font_sizes/font_size = 24
+text = "Test Planet Name"
+horizontal_alignment = 1
+
+[node name="HSplitContainer" type="HBoxContainer" parent="ObjectPanel/PlanetUI"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 12.87
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ObjectPanel/PlanetUI/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+size_flags_stretch_ratio = 0.75
+alignment = 1
+
+[node name="CargoLaneButton" type="Button" parent="ObjectPanel/PlanetUI/HSplitContainer/VBoxContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "Create Cargo Lane"
+
+[node name="ConstructStructureButton" type="Button" parent="ObjectPanel/PlanetUI/HSplitContainer/VBoxContainer"]
+layout_mode = 2
+text = "Construct Structure"
+
+[node name="PlanetListContainer" type="ScrollContainer" parent="ObjectPanel/PlanetUI/HSplitContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.74
+focus_neighbor_left = NodePath("../VBoxContainer/CargoLaneButton")
+focus_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_nnb0h")
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="PlanetList" type="VBoxContainer" parent="ObjectPanel/PlanetUI/HSplitContainer/PlanetListContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+size_flags_stretch_ratio = 0.0
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="CargoLanePanel" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -596.0
+offset_top = -269.0
+offset_right = -592.0
+offset_bottom = -269.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="PanelContainer" type="PanelContainer" parent="CargoLanePanel"]
+layout_mode = 1
+offset_left = -33.0
+offset_top = -38.0
+offset_right = 305.0
+offset_bottom = 332.0
+theme_override_styles/panel = ExtResource("3_aq7f3")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CargoLanePanel/PanelContainer"]
+layout_mode = 2
+
+[node name="Title" type="HBoxContainer" parent="CargoLanePanel/PanelContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="SourcePlanet" type="Label" parent="CargoLanePanel/PanelContainer/VBoxContainer/Title"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "TEST PLANET 1"
+
+[node name="arrow" type="Label" parent="CargoLanePanel/PanelContainer/VBoxContainer/Title"]
+layout_mode = 2
+text = "->"
+
+[node name="DestinationPlanet" type="Label" parent="CargoLanePanel/PanelContainer/VBoxContainer/Title"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "TEST PLANET 2"
+
+[node name="HSeparator" type="HSeparator" parent="CargoLanePanel/PanelContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Options" type="HBoxContainer" parent="CargoLanePanel/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+size_flags_stretch_ratio = 2.06
+alignment = 1
+
+[node name="ModeSelection" type="HBoxContainer" parent="CargoLanePanel/PanelContainer/VBoxContainer/Options"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="CargoModeSelect" type="OptionButton" parent="CargoLanePanel/PanelContainer/VBoxContainer/Options/ModeSelection"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_stretch_ratio = 0.83
+item_count = 2
+selected = 0
+popup/item_0/text = "Send Every"
+popup/item_0/id = 0
+popup/item_1/text = "Send on cargo %"
+popup/item_1/id = 1
+popup/item_1/disabled = true
+
+[node name="VSeparator" type="VSeparator" parent="CargoLanePanel/PanelContainer/VBoxContainer/Options/ModeSelection"]
+layout_mode = 2
+
+[node name="SendEveryInput" type="HBoxContainer" parent="CargoLanePanel/PanelContainer/VBoxContainer/Options/ModeSelection"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CargoTimeEdit" type="LineEdit" parent="CargoLanePanel/PanelContainer/VBoxContainer/Options/ModeSelection/SendEveryInput"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0.75"
+alignment = 3
+
+[node name="Label" type="Label" parent="CargoLanePanel/PanelContainer/VBoxContainer/Options/ModeSelection/SendEveryInput"]
+layout_mode = 2
+text = "Seconds"
+
+[node name="SendOnCargoPercentInput" type="HBoxContainer" parent="CargoLanePanel/PanelContainer/VBoxContainer/Options/ModeSelection"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="CargoPercentSelect" type="OptionButton" parent="CargoLanePanel/PanelContainer/VBoxContainer/Options/ModeSelection/SendOnCargoPercentInput"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 1
+item_count = 6
+selected = 0
+popup/item_0/text = "Full"
+popup/item_0/id = 0
+popup/item_1/text = "75%"
+popup/item_1/id = 1
+popup/item_2/text = "50%"
+popup/item_2/id = 2
+popup/item_3/text = "25%"
+popup/item_3/id = 3
+popup/item_4/text = "Any"
+popup/item_4/id = 4
+popup/item_5/text = "Never"
+popup/item_5/id = 5
+
+[node name="HSeparator2" type="HSeparator" parent="CargoLanePanel/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+size_flags_stretch_ratio = 8.46
+mouse_filter = 2
+
+[node name="SendCargoButton" type="Button" parent="CargoLanePanel/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+text = "Create Cargo Lane"
+
+[node name="ModToolsRecipe" parent="." instance=ExtResource("3_pvck6")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -338.0
+offset_top = -264.0
+offset_right = -338.0
+offset_bottom = -264.0
+
+[node name="BottomPanel" type="Panel" parent="."]
+z_index = -1
+anchors_preset = -1
+anchor_left = -0.0125
+anchor_top = 0.963889
+anchor_right = 1.0125
+anchor_bottom = 1.01481
+offset_right = -0.00012207
+mouse_filter = 2
+theme_override_styles/panel = ExtResource("3_aq7f3")
+metadata/_edit_use_anchors_ = true
+metadata/_edit_lock_ = true
+
+[node name="StarSystemOverview" type="AspectRatioContainer" parent="."]
+self_modulate = Color(0.286275, 0.360784, 0.384314, 1)
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -160.0
+offset_top = -160.0
+offset_right = -130.0
+offset_bottom = -130.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(4, 4)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+metadata/_edit_group_ = true
+
+[node name="SystemOrigin" type="Marker2D" parent="StarSystemOverview"]
+unique_name_in_owner = true
+position = Vector2(40, 40)
+rotation = -1.5708
+
+[node name="StarOverview" type="MeshInstance2D" parent="StarSystemOverview/SystemOrigin"]
+self_modulate = Color(0.988235, 0.396078, 0.258824, 1)
+mesh = SubResource("SphereMesh_ynfbw")
+
+[node name="StarSelector" type="Area2D" parent="StarSystemOverview/SystemOrigin/StarOverview"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StarSystemOverview/SystemOrigin/StarOverview/StarSelector"]
+shape = SubResource("CircleShape2D_324xp")
+
+[node name="CreateStructurePanel" parent="." instance=ExtResource("5_ds2y7")]
+visible = false
+anchors_preset = -1
+anchor_left = 0.336979
+anchor_top = 0.558333
+anchor_right = 0.336979
+anchor_bottom = 0.558333
+metadata/_edit_use_anchors_ = true
+
+[connection signal="toggled" from="CheckBox" to="." method="_on_check_box_toggled"]
+[connection signal="mouse_entered" from="ObjectPanel" to="." method="_on_ui_entered"]
+[connection signal="mouse_exited" from="ObjectPanel" to="." method="_on_ui_exited"]
+[connection signal="mouse_entered" from="ObjectPanel/PlanetUI/HSplitContainer/VBoxContainer/CargoLaneButton" to="." method="_on_ui_entered"]
+[connection signal="toggled" from="ObjectPanel/PlanetUI/HSplitContainer/VBoxContainer/CargoLaneButton" to="." method="_on_cargolane_button_toggled"]
+[connection signal="pressed" from="ObjectPanel/PlanetUI/HSplitContainer/VBoxContainer/ConstructStructureButton" to="." method="_on_create_structure_pressed"]
+[connection signal="mouse_entered" from="CargoLanePanel/PanelContainer" to="." method="_on_ui_entered"]
+[connection signal="mouse_exited" from="CargoLanePanel/PanelContainer" to="." method="_on_ui_exited"]
+[connection signal="item_selected" from="CargoLanePanel/PanelContainer/VBoxContainer/Options/ModeSelection/CargoModeSelect" to="." method="_on_cargo_mode_select_item_selected"]
+[connection signal="mouse_entered" from="CargoLanePanel/PanelContainer/VBoxContainer/Options/ModeSelection/CargoModeSelect" to="." method="_on_ui_entered"]
+[connection signal="mouse_entered" from="CargoLanePanel/PanelContainer/VBoxContainer/Options/ModeSelection/SendEveryInput/CargoTimeEdit" to="." method="_on_ui_entered"]
+[connection signal="text_changed" from="CargoLanePanel/PanelContainer/VBoxContainer/Options/ModeSelection/SendEveryInput/CargoTimeEdit" to="." method="_on_cargo_time_edit_text_changed"]
+[connection signal="mouse_entered" from="CargoLanePanel/PanelContainer/VBoxContainer/Options/ModeSelection/SendOnCargoPercentInput/CargoPercentSelect" to="." method="_on_ui_entered"]
+[connection signal="mouse_entered" from="CargoLanePanel/PanelContainer/VBoxContainer/SendCargoButton" to="." method="_on_ui_entered"]
+[connection signal="pressed" from="CargoLanePanel/PanelContainer/VBoxContainer/SendCargoButton" to="." method="_on_send_cargo_button_pressed"]
+[connection signal="mouse_entered" from="ModToolsRecipe" to="." method="_on_ui_entered"]
+[connection signal="mouse_exited" from="ModToolsRecipe" to="." method="_on_ui_exited"]
+[connection signal="mouse_entered" from="StarSystemOverview/SystemOrigin/StarOverview/StarSelector" to="." method="_on_star_selector_mouse_entered"]
+[connection signal="mouse_exited" from="StarSystemOverview/SystemOrigin/StarOverview/StarSelector" to="." method="_on_star_selector_mouse_exited"]

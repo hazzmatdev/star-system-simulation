@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://da8btdv8mqty"]
+
+[ext_resource type="Script" path="res://objects/vehicles/stellar/scripts/cargo_ship.gd" id="1_mbqnx"]
+[ext_resource type="PackedScene" uid="uid://d04wbooyymw3s" path="res://objects/vehicles/stellar/meshes/cargo_ship.blend" id="1_sdfvd"]
+
+[node name="Cargo" type="Node3D"]
+script = ExtResource("1_mbqnx")
+max_velo = 1000
+accel = 10
+
+[node name="cargo_ship" parent="." instance=ExtResource("1_sdfvd")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[connection signal="reached_destination" from="." to="." method="_on_reached_destination"]

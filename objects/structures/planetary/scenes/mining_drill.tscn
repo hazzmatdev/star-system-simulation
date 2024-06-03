@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://j2icx7hghsnv"]
+
+[ext_resource type="Script" path="res://objects/structures/planetary/scripts/MiningDrill.gd" id="1_ainht"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_i5tdx"]
+
+[node name="MiningDrill" type="Node3D"]
+script = ExtResource("1_ainht")
+recipes = Array[String](["Mine Iron"])
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_i5tdx")
+metadata/_edit_lock_ = true

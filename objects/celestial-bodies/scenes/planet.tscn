@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cp2kq35bq6q3w"]
+
+[ext_resource type="Script" path="res://objects/celestial-bodies/scripts/planet.gd" id="1_gunkn"]
+[ext_resource type="PackedScene" uid="uid://cp8fihphwgrj4" path="res://objects/celestial-bodies/meshes/Planet.blend" id="1_hce20"]
+[ext_resource type="PackedScene" uid="uid://ccniblgryym6m" path="res://objects/celestial-bodies/meshes/orbit.blend" id="3_ce24n"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_c8uhv"]
+
+[node name="PlanetOrbit" type="Node3D"]
+rotation_order = 0
+script = ExtResource("1_gunkn")
+
+[node name="Planet" type="Node3D" parent="."]
+
+[node name="PlanetMesh" parent="Planet" instance=ExtResource("1_hce20")]
+rotation_order = 0
+
+[node name="Area3D" type="Area3D" parent="Planet/PlanetMesh"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Planet/PlanetMesh/Area3D"]
+shape = SubResource("SphereShape3D_c8uhv")
+
+[node name="Orbit" parent="." instance=ExtResource("3_ce24n")]
+rotation_order = 0
+
+[connection signal="mouse_entered" from="Planet/PlanetMesh/Area3D" to="." method="_on_area_3d_mouse_entered"]
+[connection signal="mouse_exited" from="Planet/PlanetMesh/Area3D" to="." method="_on_area_3d_mouse_exited"]

@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://c87rij5iep7e"]
+
+[ext_resource type="Script" path="res://objects/structures/planetary/scenes/planetary_placer.gd" id="1_iuk3l"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xla7l"]
+cull_mode = 2
+albedo_color = Color(0.168627, 0.254902, 0.760784, 1)
+emission_enabled = true
+emission = Color(0.301961, 0.352941, 0.658824, 1)
+emission_energy_multiplier = 2.0
+rim = 0.57
+rim_tint = 1.0
+clearcoat = 0.67
+clearcoat_roughness = 0.9
+heightmap_scale = 4.939
+heightmap_deep_parallax = true
+heightmap_min_layers = 8
+heightmap_max_layers = 32
+backlight = Color(0.819608, 0.0588235, 0.454902, 1)
+refraction_scale = 0.09
+disable_receive_shadows = true
+grow = true
+grow_amount = 0.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_ve3ch"]
+material = SubResource("StandardMaterial3D_xla7l")
+size = Vector3(0.8, 0.8, 0.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yah8w"]
+
+[node name="PlanetaryPlacer" type="Node3D"]
+script = ExtResource("1_iuk3l")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_ve3ch")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_yah8w")
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="area_exited" from="Area3D" to="." method="_on_area_3d_area_exited"]

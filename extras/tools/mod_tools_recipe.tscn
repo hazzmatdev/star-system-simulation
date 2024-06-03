@@ -1,0 +1,430 @@
+[gd_scene load_steps=7 format=3 uid="uid://cxcxuultmtgdv"]
+
+[ext_resource type="Script" path="res://extras/tools/mod_tools_recipe.gd" id="1_wfh5k"]
+[ext_resource type="StyleBox" uid="uid://bah1etxdl4seb" path="res://ui/themes/ui_panel.tres" id="2_kukot"]
+[ext_resource type="StyleBox" uid="uid://ch5uu1a0wg53f" path="res://extras/tools/red_button.tres" id="3_0xp8f"]
+[ext_resource type="StyleBox" uid="uid://0i77eit01ypm" path="res://extras/tools/green_button.tres" id="3_e135r"]
+[ext_resource type="PackedScene" uid="uid://i36a1s6u3rgb" path="res://extras/tools/mod_tools_product.tscn" id="5_3jcdd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e0558"]
+bg_color = Color(0.709804, 0.14902, 0.14902, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+
+[node name="ModToolsRecipe" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 755.0
+offset_top = 226.0
+offset_right = 755.0
+offset_bottom = 226.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wfh5k")
+
+[node name="ItemLister" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 2
+offset_left = -272.0
+offset_top = 86.0
+offset_right = -33.0
+offset_bottom = 113.0
+
+[node name="Count" type="Label" parent="ItemLister"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+horizontal_alignment = 2
+
+[node name="VSeparator" type="VSeparator" parent="ItemLister"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Item" type="Label" parent="ItemLister"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.7
+text = "Test Product"
+
+[node name="Remove" type="Button" parent="ItemLister"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_styles/normal = SubResource("StyleBoxFlat_e0558")
+text = "x"
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = ExtResource("2_kukot")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+theme_override_colors/font_color = Color(0.784314, 0.513726, 0.25098, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 24
+text = "DEBUG: Add Recipe"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HFlowContainer" type="HFlowContainer" parent="PanelContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/VBoxContainer/HFlowContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Recipe Name:"
+
+[node name="RecipeName" type="LineEdit" parent="PanelContainer/VBoxContainer/VBoxContainer/HFlowContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Recipe must have a name"
+mouse_filter = 1
+alignment = 2
+expand_to_text_length = true
+
+[node name="HFlowContainer2" type="HFlowContainer" parent="PanelContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/VBoxContainer/HFlowContainer2"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Energy Cost:"
+
+[node name="Energy" type="LineEdit" parent="PanelContainer/VBoxContainer/VBoxContainer/HFlowContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Integer only. Negative implies energy generation"
+mouse_filter = 1
+text = "0"
+alignment = 2
+expand_to_text_length = true
+virtual_keyboard_type = 2
+
+[node name="HFlowContainer3" type="HFlowContainer" parent="PanelContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/VBoxContainer/HFlowContainer3"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Completion Time:"
+
+[node name="Time" type="LineEdit" parent="PanelContainer/VBoxContainer/VBoxContainer/HFlowContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Must be greater than 0"
+mouse_filter = 1
+text = "0.0"
+alignment = 2
+expand_to_text_length = true
+virtual_keyboard_type = 2
+
+[node name="HFlowContainer4" type="HFlowContainer" parent="PanelContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="input" type="Button" parent="PanelContainer/VBoxContainer/VBoxContainer/HFlowContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+text = "-> Inputs"
+alignment = 0
+
+[node name="output" type="Button" parent="PanelContainer/VBoxContainer/VBoxContainer/HFlowContainer4"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+text = "Outputs ->"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "Tooltip:"
+horizontal_alignment = 1
+
+[node name="Tooltip" type="TextEdit" parent="PanelContainer/VBoxContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 1
+placeholder_text = "Adding a tooltip is optional, but recommended"
+wrap_mode = 1
+scroll_fit_content_height = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="add" type="Button" parent="PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_styles/normal = ExtResource("3_e135r")
+text = "Add"
+
+[node name="cancel" type="Button" parent="PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_styles/normal = ExtResource("3_0xp8f")
+text = "Cancel"
+
+[node name="RecipeInputs" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 0
+offset_left = -349.0
+offset_right = -277.0
+
+[node name="PanelContainer" type="PanelContainer" parent="RecipeInputs"]
+layout_mode = 1
+offset_left = -63.0
+offset_right = 325.0
+offset_bottom = 180.0
+theme_override_styles/panel = ExtResource("2_kukot")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RecipeInputs/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="RecipeInputs/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+size_flags_stretch_ratio = 0.76
+theme_override_colors/font_color = Color(0.784314, 0.513726, 0.25098, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 24
+text = "DEBUG: Recipe Input"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="RecipeInputs/PanelContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="RecipeInputItems" type="VBoxContainer" parent="RecipeInputs/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="RecipeInputs/PanelContainer/VBoxContainer/RecipeInputItems"]
+layout_mode = 2
+
+[node name="Count" type="Label" parent="RecipeInputs/PanelContainer/VBoxContainer/RecipeInputItems/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Units"
+horizontal_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="RecipeInputs/PanelContainer/VBoxContainer/RecipeInputItems/HBoxContainer2"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Item" type="Label" parent="RecipeInputs/PanelContainer/VBoxContainer/RecipeInputItems/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.7
+text = "Product Name"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="RecipeInputs/PanelContainer/VBoxContainer/RecipeInputItems"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="AddInputItem" type="HBoxContainer" parent="RecipeInputs/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="CountInput" type="LineEdit" parent="RecipeInputs/PanelContainer/VBoxContainer/AddInputItem"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Integer only"
+mouse_filter = 1
+placeholder_text = "0"
+alignment = 1
+
+[node name="ExistingProductInput" type="OptionButton" parent="RecipeInputs/PanelContainer/VBoxContainer/AddInputItem"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.7
+mouse_filter = 1
+item_count = 1
+popup/item_0/text = "New Product"
+popup/item_0/id = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RecipeInputs/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="InputAdd" type="Button" parent="RecipeInputs/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_styles/normal = ExtResource("3_e135r")
+text = "Add"
+
+[node name="InputClear" type="Button" parent="RecipeInputs/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_styles/normal = ExtResource("3_0xp8f")
+text = "Clear"
+
+[node name="ModToolsProduct" parent="." instance=ExtResource("5_3jcdd")]
+visible = false
+layout_mode = 1
+offset_left = -8.0
+offset_top = 380.0
+
+[node name="RecipeOutputs" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 321.0
+offset_right = 393.0
+
+[node name="PanelContainer" type="PanelContainer" parent="RecipeOutputs"]
+layout_mode = 1
+offset_left = -63.0
+offset_right = 325.0
+offset_bottom = 180.0
+theme_override_styles/panel = ExtResource("2_kukot")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RecipeOutputs/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="RecipeOutputs/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+size_flags_stretch_ratio = 0.76
+theme_override_colors/font_color = Color(0.784314, 0.513726, 0.25098, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 24
+text = "DEBUG: Recipe Output
+"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="RecipeOutputs/PanelContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="RecipeOutputItems" type="VBoxContainer" parent="RecipeOutputs/PanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="RecipeOutputs/PanelContainer/VBoxContainer/RecipeOutputItems"]
+layout_mode = 2
+
+[node name="Count" type="Label" parent="RecipeOutputs/PanelContainer/VBoxContainer/RecipeOutputItems/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Units"
+horizontal_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="RecipeOutputs/PanelContainer/VBoxContainer/RecipeOutputItems/HBoxContainer2"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="Item" type="Label" parent="RecipeOutputs/PanelContainer/VBoxContainer/RecipeOutputItems/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.7
+text = "Product Name"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="RecipeOutputs/PanelContainer/VBoxContainer/RecipeOutputItems"]
+layout_mode = 2
+mouse_filter = 1
+
+[node name="AddOutputItem" type="HBoxContainer" parent="RecipeOutputs/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="CountOutput" type="LineEdit" parent="RecipeOutputs/PanelContainer/VBoxContainer/AddOutputItem"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "Integer only"
+mouse_filter = 1
+placeholder_text = "0"
+alignment = 1
+
+[node name="ExistingProductOutput" type="OptionButton" parent="RecipeOutputs/PanelContainer/VBoxContainer/AddOutputItem"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.7
+mouse_filter = 1
+item_count = 1
+popup/item_0/text = "New Product"
+popup/item_0/id = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="RecipeOutputs/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="OutputAdd" type="Button" parent="RecipeOutputs/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_styles/normal = ExtResource("3_e135r")
+text = "Add"
+
+[node name="OutputCancel" type="Button" parent="RecipeOutputs/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_styles/normal = ExtResource("3_0xp8f")
+text = "Clear"
+
+[connection signal="text_changed" from="PanelContainer/VBoxContainer/VBoxContainer/HFlowContainer2/Energy" to="." method="_on_energy_text_changed"]
+[connection signal="text_changed" from="PanelContainer/VBoxContainer/VBoxContainer/HFlowContainer3/Time" to="." method="_on_time_text_changed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/VBoxContainer/HFlowContainer4/input" to="." method="_on_input_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/VBoxContainer/HFlowContainer4/output" to="." method="_on_output_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer/add" to="." method="_on_add_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/VBoxContainer/HBoxContainer/cancel" to="." method="_on_cancel_pressed"]
+[connection signal="mouse_entered" from="RecipeInputs/PanelContainer" to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="RecipeInputs/PanelContainer" to="." method="_on_mouse_exited"]
+[connection signal="text_changed" from="RecipeInputs/PanelContainer/VBoxContainer/AddInputItem/CountInput" to="." method="_on_count_input_text_changed"]
+[connection signal="item_selected" from="RecipeInputs/PanelContainer/VBoxContainer/AddInputItem/ExistingProductInput" to="." method="_on_existing_product_item_selected"]
+[connection signal="pressed" from="RecipeInputs/PanelContainer/VBoxContainer/HBoxContainer/InputAdd" to="." method="_on_input_add_pressed"]
+[connection signal="pressed" from="RecipeInputs/PanelContainer/VBoxContainer/HBoxContainer/InputClear" to="." method="_on_input_clear_pressed"]
+[connection signal="mouse_entered" from="ModToolsProduct" to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="ModToolsProduct" to="." method="_on_mouse_exited"]
+[connection signal="product_created" from="ModToolsProduct" to="." method="_on_mod_tools_product_product_created"]
+[connection signal="mouse_entered" from="RecipeOutputs/PanelContainer" to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="RecipeOutputs/PanelContainer" to="." method="_on_mouse_exited"]
+[connection signal="text_changed" from="RecipeOutputs/PanelContainer/VBoxContainer/AddOutputItem/CountOutput" to="." method="_on_count_output_text_changed"]
+[connection signal="item_selected" from="RecipeOutputs/PanelContainer/VBoxContainer/AddOutputItem/ExistingProductOutput" to="." method="_on_existing_product_item_selected"]
+[connection signal="pressed" from="RecipeOutputs/PanelContainer/VBoxContainer/HBoxContainer/OutputAdd" to="." method="_on_output_add_pressed"]
+[connection signal="pressed" from="RecipeOutputs/PanelContainer/VBoxContainer/HBoxContainer/OutputCancel" to="." method="_on_output_clear_pressed"]
