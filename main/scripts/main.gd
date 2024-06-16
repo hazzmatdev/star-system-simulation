@@ -52,6 +52,7 @@ func _ready():
 	# Set Camera Settings
 	camera = $CameraPivot
 	camera.max_zoom *= world_scalar
+	$CameraPivot/Camera3D.position.y *= world_scalar * star_scalar / 100
 	
 	#UI
 	$UI.make_planet_ui()

@@ -67,7 +67,6 @@ offset_right = 32.0
 offset_bottom = -8.0
 grow_vertical = 0
 size_flags_vertical = 0
-button_pressed = true
 metadata/_edit_use_anchors_ = true
 metadata/_edit_group_ = true
 
@@ -146,6 +145,7 @@ text = "Create Cargo Lane"
 
 [node name="ConstructStructureButton" type="Button" parent="ObjectPanel/PlanetUI/HSplitContainer/VBoxContainer"]
 layout_mode = 2
+disabled = true
 text = "Construct Structure"
 
 [node name="PlanetListContainer" type="ScrollContainer" parent="ObjectPanel/PlanetUI/HSplitContainer"]
