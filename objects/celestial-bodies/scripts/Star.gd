@@ -7,7 +7,8 @@ var star_select_ready := false
 
 func _input(event):
 	if star_select_ready and event.is_action_pressed("ui_click"):
-		star_select.emit()
+		if event.is_double_click():
+			star_select.emit()
 
 
 func _on_area_3d_mouse_entered():
